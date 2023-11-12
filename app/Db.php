@@ -2,35 +2,24 @@
 
 namespace App;
 use PDO;
+use wfm\TSingleton;
 
 class Db {
-    private static $instance = null;
+
+    use TSingleton;
+
     private $conn;
-
-    private $host = "localhost";
-    private $dbname = "moneyapp";
-    private $user = "root";
-    private $password = "";
-
 
     public function __construct()
     {
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname",$this->user, $this->password);
+            $db = require_once '../config/config_db.php';
+            $this->conn = new PDO("mysql:host={$db['host']};dbname={$db['dbname']}", $db['user'], $db['password']);
             $this->conn->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
         } catch(\PDOException $e)
         {
             die("Database connection failed: " . $e->getMessage());
         }
-    }
-
-    public static function getInstance()
-    {
-        if(!self::$instance)
-        {
-            self::$instance = new Db();
-        }
-        return self::$instance;
     }
 
     public function getConnection()

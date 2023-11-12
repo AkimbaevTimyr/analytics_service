@@ -12,12 +12,7 @@ $cat_id = $_GET['cat_id'];
 if(isset($cat_id)) 
 {
     $categories = new Categories();
-    if($cat_id == 0)
-    {
-        $result = $categories->get();
-    } else {
-        $result = $categories->getInfoById($cat_id);
-    }
+    $result = $cat_id == 0 ? $categories->get() : $categories->getInfoById($cat_id);
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
+require_once ('../vendor/autoload.php');
+use App\Categories;
 
-include("./db.php");
-include("./categories.php");
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -9,15 +9,14 @@ ini_set('display_errors', 1);
 $cat_id = $_GET['cat_id'];
 
 
-
 if(isset($cat_id)) 
 {
+    $categories = new Categories();
     if($cat_id == 0)
     {
-        $categories = new Categories();
         $result = $categories->get();
     } else {
-        $result = $pdo->query('SELECT CATSUM.* FROM category_summaries AS CATSUM WHERE CATSUM.category_id = ' . $cat_id . '');
+        $result = $categories->getInfoById($cat_id);
     }
 }
 

@@ -1,3 +1,27 @@
+<?php 
+use App\Categories;
+use App\Summaries;
+require_once ('../vendor/autoload.php');
+
+$cat = new Categories();
+$summaries = new Summaries();
+
+$categories = $cat->get();
+
+$data = $_POST;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $amount = $_POST['amount'];
+    $description = $_POST['description'];
+    $cat_id = $_POST['category_id'];
+    
+    $summaries->addSum($cat_id, $amount, $description);
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit;
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -8,10 +32,6 @@
 </head>
 
 <body>
-    <?php
-        include("./categories.php");
-        $categories = new Categories();
-    ?>
     <div class="container-sm">
         <select class="form-select form-select-lg mb-3 mt-3" aria-label=".form-select-lg example" onclick="handleSelect(event)">
             <option value="0" selected>Все</option>
@@ -27,7 +47,7 @@
             <div class="col-sm-9">
                 <div id="categories_block">
                     <div class="row d-flex justify-content-between mb-5 text-center" > 
-                        <?php foreach ($categories->get() as $cat) : ?>
+                        <?php foreach ($categories as $cat) : ?>
                             <div class="col-sm-4 mb-3">
                                 <button type="button" class="border-0 bg-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <div class="d-flex align-items-center flex-column justify-content-center">
@@ -56,7 +76,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div>
-                                        <form method="POST" target="_self" id="form">
+                                        <form method="POST" target="_self" id="form" action="<?php echo $_SERVER['PHP_SELF'];?>">
                                             <div class="modal-body">
                                                 <div class="input-group flex-nowrap mb-3">
                                                     <input type="text" class="form-control" placeholder="Введите сумму"  type="text" name="amount" aria-label="Username" aria-describedby="addon-wrapping">
@@ -97,24 +117,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-
-        $('#form').submit(function(event) {
-            event.preventDefault();
-            let formData = $(this).serialize();
-            
-            $.ajax({
-                url: 'addsum.php',
-                method: 'POST',
-                data: formData,
-                success:function(resp) {
-                    alert('Сумма успешно добавлена');
-                    location.reload();
-                },
-                error:function(error) {
-                    alert('Произошла ошибка');
-                }
-            })
-        })
 
         function handleSelect(e){
             let cat_id = e.target.value;

@@ -23,8 +23,9 @@ class Auth extends Base
         if (password_verify($password, $user['password'])) {
             session_start();
             $_SESSION['user'] = $email;
-            $this->Redirect('/index.php');
+            $_SESSION['user_id'] = $user['id'];
             session_write_close();
+            $this->Redirect('/index.php');
         } else {
             echo 'Wrong password';
         }

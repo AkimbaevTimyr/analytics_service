@@ -3,11 +3,13 @@ use App\Categories;
 use App\Summaries;
 use App\Transactions;
 require_once ('../vendor/autoload.php');
+session_start();
+$user_id = $_SESSION['user_id'];
 
 $cat = new Categories();
 $summaries = new Summaries();
 
-$categories = $cat->get();
+$categories = $cat->get($user_id);
 
 $data = $_POST;
 
@@ -16,12 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $cat_id = $_POST['category_id'];
     
-    $summaries->addSum($cat_id, $amount, $description);
+    $summaries->addSum($cat_id, $amount, $description, $user_id);
     header("Location: " . $_SERVER['REQUEST_URI']);
     exit;
 }
-
-session_start()
 
 
 ?>
@@ -135,7 +135,7 @@ session_start()
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <?php 
                     $model = new Transactions();
-                    $data = $model->getAll();
+                    $data = $model->getAll($user_id);
                     $transactions = $data['transactions'];
                     $dailySummary = $data['dailySummary'];
                 ?>
@@ -187,13 +187,17 @@ session_start()
     <script>
 
         function handleSelect(e){
+            let user_id = "<?= $user_id ?>";
             let cat_id = e.target.value;
             let categories_block = $("#categories_block");
 
             $.ajax({
                 url: 'getCatInfo.php',
                 method: 'GET',
-                data: {cat_id},
+                data: {
+                    cat_id,
+                    user_id
+                },
                 success: function (resp) {
                     categories_block.html('');
                     categories_block.html(resp)

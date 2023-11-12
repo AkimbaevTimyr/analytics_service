@@ -7,12 +7,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $cat_id = $_GET['cat_id'];
+$user_id = $_GET['user_id'];
 
 
 if(isset($cat_id)) 
 {
     $categories = new Categories();
-    $result = $cat_id == 0 ? $categories->get() : $categories->getInfoById($cat_id);
+    $result = $cat_id == 0 ? $categories->get($user_id) : $categories->getInfoById($cat_id, $user_id);
 }
 
 ?>

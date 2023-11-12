@@ -2,11 +2,10 @@
 
 namespace App;
 use PDO;
-use wfm\TSingleton;
+use wfm\Base;
 
-class Db {
-
-    use TSingleton;
+class Db extends Base 
+{
 
     private $conn;
 

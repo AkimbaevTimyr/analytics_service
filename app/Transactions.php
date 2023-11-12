@@ -7,7 +7,6 @@ class Transactions
 {
     protected $db;
 
-
     public function __construct()
     {
         $this->db = Db::getInstance()->getConnection();

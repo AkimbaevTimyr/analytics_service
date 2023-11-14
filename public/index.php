@@ -4,7 +4,7 @@ use App\Summaries;
 use App\Transactions;
 require_once ('../vendor/autoload.php');
 session_start();
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'] ?? '';
 
 $cat = new Categories();
 $summaries = new Summaries();

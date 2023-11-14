@@ -9,6 +9,7 @@
 <body>
     <?php 
     require_once ('../vendor/autoload.php');
+    session_start();
     use App\Auth;
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
@@ -18,6 +19,9 @@
             $model->login($email, $password);
         }
     ?>
+    <?php if(isset($_SESSION['user'])): ?>
+        <?php header("Location: index.php"); ?>
+    <?php endif; ?>
     <div class="container mt-5">
         <div class="row">
             <div class="col"></div>

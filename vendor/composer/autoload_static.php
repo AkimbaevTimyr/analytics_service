@@ -11,6 +11,10 @@ class ComposerStaticInit2fd98e77aef7e9570e10b6921b19c9a0
         array (
             'wfm\\' => 4,
         ),
+        'c' => 
+        array (
+            'config\\' => 7,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -21,6 +25,10 @@ class ComposerStaticInit2fd98e77aef7e9570e10b6921b19c9a0
         'wfm\\' => 
         array (
             0 => __DIR__ . '/..' . '/wfm',
+        ),
+        'config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config',
         ),
         'App\\' => 
         array (

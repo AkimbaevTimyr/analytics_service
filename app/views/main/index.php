@@ -1,7 +1,6 @@
 <?php
-$date1 = date('Y-m-d', strtotime('-1 month'));
-$date2 = date('Y-m-d');
-
+	$date1 = date('Y-m-d', strtotime('-1 month'));
+	$date2 = date('Y-m-d');
 ?>
 
 <div>
@@ -10,7 +9,7 @@ $date2 = date('Y-m-d');
 			<div class="text-center animated fadeInDown">
 				<h2>Активность пользователей по сервису соцсетей</h2>
 			</div>
-			<form class="col-lg-12">
+			<form class="col-lg-12 pt-3">
 				<div class="form-group col-lg-12">
 					<span>Начальная дата: </span><input type="date" name="s_date" value="<?=$date1?>">
 					<span>Конечная дата: </span><input type="date" name="f_date" value="<?=$date2?>">
@@ -24,40 +23,31 @@ $date2 = date('Y-m-d');
 			<div class="col-lg-12">
 				<div class="ibox ">
 					<div class="ibox-content">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs pt-3">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#home">Вконтакте</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#tab-1">Вконтакте</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu1">Facebook</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Facebook</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu2">Twitter</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Twitter</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu3">Instagram</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Instagram</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu4">YouTube</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-6">YouTube</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu5">Telegram</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-9">Telegram</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu6">Все соцсети</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-all">Все соцсети</a>
                             </li>
                         </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane container active" id="home">1</div>
-                            <div class="tab-pane container fade" id="menu1">2</div>
-                            <div class="tab-pane container fade" id="menu2">3</div>
-                            <div class="tab-pane container fade" id="menu3">4</div>
-                            <div class="tab-pane container fade" id="menu4">5</div>
-                            <div class="tab-pane container fade" id="menu5">6</div>
-                            <div class="tab-pane container fade" id="menu6">7</div>
-                        </div>
-                        <div class="tab-content">
-							<?foreach($types as $type){?>
+                        <div class="tab-content pt-3">
+							<?php foreach($types as $type): ?>
 								<div role="tabpanel" id="tab-<?=$type?>" class="tab-pane <?if($type==1) echo 'active';?>">
 									<div class="panel-body">
 										<table style="text-align:center;" class="table table-striped">
@@ -70,8 +60,20 @@ $date2 = date('Y-m-d');
 												<td>Ошибка сбора</td>
 												<td>В очереди</td>
 											</tr>
-											<?foreach($usersStats as $user){
-												if($user['username']!='total'){
+											<?php foreach($userStats as $user): ?>
+                                                <?php if($type == $user['type']): ?>
+                                                    <tr>
+                                                        <td><?= $user['username'] ?></td>
+                                                        <td><?= $user['count'] ?></td>
+														<td><?= $user['count'] ?></td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+												<!-- if($user['username']!='total'){
 													echo "<tr>";
 														echo '<td><a href="/service_stat_one.php?username='.$user['username'].'&s_date='.$date1.'&f_date='.$date2.'" target="_blank">'.$user['username'].'</a></td>';
 														if(isset($user['total'][$type])) echo "<td style='background-color: #dbdbdb;'>".$user['total'][$type]."</td>";
@@ -103,11 +105,11 @@ $date2 = date('Y-m-d');
 											// 	else echo "<td>0</td>";
 											// 	if(isset($users['total']['types'][$type])) echo "<td>".$users['total']['types'][$type]."</td>";
 											// 	else echo "<td>0</td>";
-											// echo "</tr>";?>
+											// echo "</tr>";?> -->
 										</table>
 									</div>
 								</div>
-							<?}?>
+							<?php endforeach; ?>
                         </div>
 					</div>
 				</div>

@@ -12,9 +12,8 @@ class Db extends Base
     {
         try {
             $db = require_once './config/config_db.php';
-            $this->connection = new \PDO("mysql:host={$db['host']};dbname={$db['dbname']}", $db['user'], $db['password']);
+            $this->connection = new \PDO("mysql:host=localhost;dbname=app", 'root', '');
             $this->connection->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-
         } catch(\PDOException $e)
         {
             die("Database connection failed: " . $e->getMessage());

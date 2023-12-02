@@ -6,7 +6,6 @@ use core\Base;
 
 class Db extends Base 
 {
-
     private $conn;
 
     public function __construct()

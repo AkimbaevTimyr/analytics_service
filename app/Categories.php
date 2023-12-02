@@ -2,7 +2,7 @@
 
 namespace App;
 use PDOException;
-use wfm\Db;
+use core\Db;
 
 class Categories extends Db
 {

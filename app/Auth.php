@@ -4,7 +4,7 @@ namespace App;
 
 use Exception;
 use PDO;
-use wfm\Base;
+use core\Base;
 
 class Auth extends Base
 {

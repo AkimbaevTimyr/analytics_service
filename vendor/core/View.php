@@ -1,8 +1,8 @@
 <?php
 
-namespace wfm;
+namespace core;
 
-use wfm\Page;
+use core\Page;
 
 class View
 {

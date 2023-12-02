@@ -2,7 +2,7 @@
 
 namespace App;
 use PDO;
-use wfm\Base;
+use core\Base;
 
 class Db extends Base 
 {

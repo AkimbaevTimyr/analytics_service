@@ -2,11 +2,10 @@
 
 require_once ('./vendor/autoload.php');
 
-use wfm\Router;
-use wfm\Dispatcher;
-use wfm\View;
+use core\Router;
+use core\Dispatcher;
+use core\View;
 
-use wfm\Db;
 
 
 error_reporting(E_ALL);

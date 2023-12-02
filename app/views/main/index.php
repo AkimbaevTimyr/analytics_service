@@ -1,6 +1,6 @@
 <?php
 $date1 = date('Y-m-d', strtotime('-1 month'));
-$date2
+$date2 = date('Y-m-d');
 
 ?>
 
@@ -55,6 +55,59 @@ $date2
                             <div class="tab-pane container fade" id="menu4">5</div>
                             <div class="tab-pane container fade" id="menu5">6</div>
                             <div class="tab-pane container fade" id="menu6">7</div>
+                        </div>
+                        <div class="tab-content">
+							<?foreach($types as $type){?>
+								<div role="tabpanel" id="tab-<?=$type?>" class="tab-pane <?if($type==1) echo 'active';?>">
+									<div class="panel-body">
+										<table style="text-align:center;" class="table table-striped">
+											<tr style='font-weight: bold;'>
+												<td>Аккаунт</td>
+												<td style='background-color: #dbdbdb;'>Всего</td>
+												<td>Добавлено в проект</td>
+												<td>Дубликатов (было в проекте)</td>
+												<td>Добавлено в систему, но не в проект</td>
+												<td>Ошибка сбора</td>
+												<td>В очереди</td>
+											</tr>
+											<?foreach($usersStats as $user){
+												if($user['username']!='total'){
+													echo "<tr>";
+														echo '<td><a href="/service_stat_one.php?username='.$user['username'].'&s_date='.$date1.'&f_date='.$date2.'" target="_blank">'.$user['username'].'</a></td>';
+														if(isset($user['total'][$type])) echo "<td style='background-color: #dbdbdb;'>".$user['total'][$type]."</td>";
+														else echo "<td style='background-color: #dbdbdb;'>0</td>";
+														if(isset($user['done_win'][$type])) echo "<td>".$user['done_win'][$type]."</td>";
+														else echo "<td>0</td>";
+														if(isset($user['dublicate'][$type])) echo "<td>".$user['dublicate'][$type]."</td>";
+														else echo "<td>0</td>";
+														if(isset($user['done'][$type])) echo "<td>".$user['done'][$type]."</td>";
+														else echo "<td>0</td>";
+														if(isset($user['delete'][$type])) echo "<td>".$user['delete'][$type]."</td>";
+														else echo "<td>0</td>";
+														if(isset($user['types'][$type])) echo "<td>".$user['types'][$type]."</td>";
+														else echo "<td>0</td>";
+													echo "</tr>";
+												}
+											}
+											// echo "<tr style='font-weight:bold'>";
+											// 	echo "<td>Итого</td>";
+											// 	if(isset($users['total']['total'][$type])) echo "<td style='background-color: #dbdbdb;'>".$users['total']['total'][$type]."</td>";
+											// 	else echo "<td style='background-color: #dbdbdb;'>0</td>";
+											// 	if(isset($users['total']['done_win'][$type])) echo "<td>".$users['total']['done_win'][$type]."</td>";
+											// 	else echo "<td>0</td>";
+											// 	if(isset($users['total']['dublicate'][$type])) echo "<td>".$users['total']['dublicate'][$type]."</td>";
+											// 	else echo "<td>0</td>";
+											// 	if(isset($users['total']['done'][$type])) echo "<td>".$users['total']['done'][$type]."</td>";
+											// 	else echo "<td>0</td>";
+											// 	if(isset($users['total']['delete'][$type])) echo "<td>".$users['total']['delete'][$type]."</td>";
+											// 	else echo "<td>0</td>";
+											// 	if(isset($users['total']['types'][$type])) echo "<td>".$users['total']['types'][$type]."</td>";
+											// 	else echo "<td>0</td>";
+											// echo "</tr>";?>
+										</table>
+									</div>
+								</div>
+							<?}?>
                         </div>
 					</div>
 				</div>

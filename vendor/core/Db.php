@@ -1,7 +1,7 @@
 <?php
 
-namespace wfm;
-use wfm\Base;
+namespace core;
+use core\Base;
 
 class Db extends Base
 {
@@ -14,6 +14,7 @@ class Db extends Base
             $db = require_once './config/config_db.php';
             $this->connection = new \PDO("mysql:host={$db['host']};dbname={$db['dbname']}", $db['user'], $db['password']);
             $this->connection->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+
         } catch(\PDOException $e)
         {
             die("Database connection failed: " . $e->getMessage());

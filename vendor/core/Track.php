@@ -1,23 +1,20 @@
 <?php
 
-namespace wfm;
+namespace core;
 
-
-class Route
+class Track
 {
-    private $path;
-
     private $controller;
-
     private $action;
+    private $params;
 
-    public function __construct($path, $controller, $action)
+    public function __construct( $controller, $action, $params = [] )
     {
-        $this->path = $path;
         $this->controller = $controller;
         $this->action = $action;
+        $this->params = $params;
     }
-
+    
     public function __get($property)
     {
         return $this->$property;

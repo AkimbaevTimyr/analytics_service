@@ -1,7 +1,7 @@
 <?php
 require_once ('./vendor/autoload.php');
 
-use wfm\Route;
+use core\Route;
 
 return [
     new Route('/', 'main', 'index'),

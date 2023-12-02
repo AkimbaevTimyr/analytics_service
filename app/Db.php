@@ -28,3 +28,86 @@ class Db extends Base
     
 }
 
+
+interface NewsInterface{
+    public function getLastNews();
+    public function getNewsByRegion();
+    public function getNewsByDate();
+}
+
+class News implements NewsInterface {
+    public function getLastNews() {
+        return 'Получить последние новости';
+    }
+    public function getNewsByRegion() {
+        return 'Получить новости по региону';
+    }
+    public function getNewsByDate() {
+        return 'Получить новости по дате';
+    }
+}
+
+
+
+// Интерфейс устройства
+interface Device {
+    public function isEnabled();
+    public function enable();
+    public function disable();
+    public function getVolume();
+    public function setVolume($percent);
+    public function getChannel();
+    public function setChannel($channel);
+}
+
+
+// Класс Пульта
+class Remote {
+    protected $device;
+
+    public function __construct(Device $device) {
+        $this->device = $device;
+    }
+
+    public function togglePower() {
+        if ($this->device->isEnabled()) {
+            $this->device->disable();
+        } else {
+            $this->device->enable();
+        }
+    }
+
+    public function volumeDown() {
+        $this->device->setVolume($this->device->getVolume() - 10);
+    }
+
+    public function volumeUp() {
+        $this->device->setVolume($this->device->getVolume() + 10);
+    }
+
+    public function channelDown() {
+        $this->device->setChannel($this->device->getChannel() - 1);
+    }
+
+    public function channelUp() {
+        $this->device->setChannel($this->device->getChannel() + 1);
+    }
+}
+
+// Расширенный класс Пульта
+class AdvancedRemote extends Remote {
+    public function mute() {
+        $this->device->setVolume(0);
+    }
+}
+
+// Пример использования
+$tv = new Tv();
+$remote = new Remote($tv);
+$remote->togglePower();
+
+$radio = new Radio();
+$advancedRemote = new AdvancedRemote($radio);
+
+?>
+

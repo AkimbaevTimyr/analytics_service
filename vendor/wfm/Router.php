@@ -11,18 +11,19 @@ class Router
         foreach($routes as $route)
         {
             $patterbn = $this->createPattern($route->path);
-
             if(preg_match($patterbn, $uri, $params))
             {
                 $params = $this->clearParams($params);
                 return new Track($route->controller, $route->action, $params);
+            } else {
+                throw new \Exception("Preg match dont work. Please chech your routes.");
             }
         }
     }
 
     private function createPattern($path)
     {
-        return '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', $path) . '/?$#';
+        return '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', '/moneyapp' . $path) . '/?$#';
     }
 
     private function clearParams($params)

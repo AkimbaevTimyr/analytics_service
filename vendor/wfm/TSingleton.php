@@ -15,3 +15,4 @@ trait TSingleton
         return static::$instance ?? static::$instance = new static();
     }
 }
+

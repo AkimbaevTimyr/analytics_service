@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'dbname' => 'moneyapp',
+    'dbname' => 'app',
     'user'=> 'root',
     'password' => ''
 ];

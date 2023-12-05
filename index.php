@@ -14,7 +14,6 @@ ini_set('display_errors', 'on');
 //получаем маршруты
 $routes = require __DIR__ . '/config/routes.php';
 
-
 //получаем controller, action, params
 $track = ( new Router($routes) ) -> getTrack($routes, $_SERVER['REQUEST_URI']);
 

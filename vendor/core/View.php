@@ -16,7 +16,7 @@ class View
     //if i have moneyapp or something prefix i use $_SERVER['DOCUMENT_ROOT']
     private function renderLayout(Page $page, $content) 
     {
-		$layoutPath = $_SERVER['DOCUMENT_ROOT'] . $this->url . "/app/views/layouts/{$page->layout}.php";
+		$layoutPath = $_SERVER['DOCUMENT_ROOT'] . "/app/views/layouts/{$page->layout}.php";
         if(file_exists($layoutPath))
         {
             ob_start();
@@ -31,7 +31,7 @@ class View
     
     private function renderView(Page $page) 
     {
-        $viewPath = $_SERVER['DOCUMENT_ROOT'] . $this->url . "/app/views/{$page->view}.php";
+        $viewPath = $_SERVER['DOCUMENT_ROOT'] . "/app/views/{$page->view}.php";
         if(file_exists($viewPath))
         {
             ob_start();

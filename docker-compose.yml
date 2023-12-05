@@ -14,13 +14,45 @@ services:
       - ./:/var/www/html
       - ./logs/nginx:/var/log/nginx
   php:
-    image: php:fpm-alpine
+    build: 
+      context: .
+      dockerfile: php/Dockerfile
     networks:
       - moneyapp
     volumes:
       - ./:/var/www/html/
       - ./logs/php.log:/var/log/fpm-php.www.log
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - moneyapp
+    volumes:
+      - db:/var/lib/mysql:rw
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=laravel
+      - PMA_PASSWORD=root
+      - PMA_ARBITRARY=1
+    ports:
+      - "8081:80"
+    networks:
+      - moneyapp
+    depends_on:
+      - mysql
 
+volumes:
+  db:
 
 networks:
   moneyapp:

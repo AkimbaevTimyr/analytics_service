@@ -11,8 +11,6 @@ class Router
         foreach($routes as $route)
         {
             $patterbn = $this->createPattern($route->path);
-            var_dump($patterbn);
-            var_dump($uri);
             if(preg_match($patterbn, $uri, $params))
             {
                 $params = $this->clearParams($params);
@@ -26,8 +24,7 @@ class Router
 
     private function createPattern($path)
     {
-        return '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', '/moneyapp' . $path) . '/?$#';
-        // return '#^' . '/moneyapp' . $path . '/?$#';
+        return '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', $path) . '/?$#';
     }
 
     private function clearParams($params)
